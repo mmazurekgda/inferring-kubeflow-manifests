@@ -1,4 +1,4 @@
 bases:
   - ../../base
-# patches:
-#   - one_file.yaml
+patches:
+  - istio/service.yaml
