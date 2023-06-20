@@ -5,3 +5,9 @@ metadata:
   namespace: istio-system
 spec:
   type: NodePort
+  ports:
+  - name: http2
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 31916

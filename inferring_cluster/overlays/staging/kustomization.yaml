@@ -2,4 +2,3 @@ resources:
   - ../../base
 patchesStrategicMerge:
   - istio/service.yaml
-  - istio/profile.yaml
