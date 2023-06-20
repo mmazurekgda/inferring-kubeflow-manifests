@@ -1,0 +1,4 @@
+bases:
+  - ../../base
+# patches:
+#   - one_file.yaml
