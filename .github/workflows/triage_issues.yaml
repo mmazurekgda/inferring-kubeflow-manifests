@@ -1,6 +1,7 @@
 # Define a GitHub action workflow to determine whether issues 
 # should be added or removed from the Needs Triage Kanban board.
 name: Check Triage Status of Issue
+
 on:
   issues:
     types: [opened, closed, reopened, transferred, labeled, unlabeled]
@@ -8,6 +9,7 @@ on:
 
 jobs:
   test:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Update Kanban
