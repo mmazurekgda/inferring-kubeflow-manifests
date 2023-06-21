@@ -1,0 +1,28 @@
+name: Unit Test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build_staging:
+    name: Build staging
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v2
+
+    - name: Install kustomize
+      run: ./tests/gh-actions/install_kustomize.sh
+
+    - name: Run kustomize
+      run: |
+        kustomize build inferring_cluster/overlays/staging | tee install.yaml
+    
+    - name: Upload install.yaml
+      uses: actions/upload-artifact@v3
+      with:
+        name: install.yaml
+        path: install.yaml
+        retention-days: 5
