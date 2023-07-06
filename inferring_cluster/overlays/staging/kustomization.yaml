@@ -2,4 +2,5 @@ resources:
   - ../../base
 patchesStrategicMerge:
   - istio/service.yaml
-  - centraldashboard/configmap.yaml
+  - centraldashboard/config-map.yaml
+  - dex/config-map.yaml
