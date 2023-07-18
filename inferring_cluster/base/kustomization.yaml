@@ -78,8 +78,11 @@ resources:
 # Training Operator
 - ../../apps/training-operator/upstream/overlays/kubeflow
 # User namespace
-- ../../common/user-namespace/base
-
+# Michal: to be replaced by custom profiles
+# - ../../common/user-namespace/base
 # KServe
 - ../../contrib/kserve/kserve
 - ../../contrib/kserve/models-web-app/overlays/kubeflow
+
+# Bitnami
+- bitnami/controller.yaml 

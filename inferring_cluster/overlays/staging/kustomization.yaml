@@ -1,6 +1,9 @@
 resources:
   - ../../base
+  - dex/dex_config_secret_sealed.json
+  # decrypt it first!
+  - dex/jb-admin-profile.yaml
 patchesStrategicMerge:
   - istio/service.yaml
   - centraldashboard/config-map.yaml
-  - dex/config-map.yaml
+  - dex/deployment.yaml
