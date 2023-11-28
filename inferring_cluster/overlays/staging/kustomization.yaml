@@ -1,9 +1,6 @@
 resources:
   - ../../base
-  - oidc-authservice
-  - dex/dex_config_secret_sealed.json
-  # decrypt it first!
-  - dex/jb-admin-profile.yaml
+  - oidc_authservice
 patchesStrategicMerge:
   - istio/service.yaml
   - centraldashboard/config-map.yaml

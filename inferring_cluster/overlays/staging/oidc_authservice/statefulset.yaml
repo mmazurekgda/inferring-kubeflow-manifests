@@ -26,8 +26,10 @@ spec:
         envFrom:
           - secretRef:
               name: oidc-authservice-client-parameters-secret
+              namespace: predator-secrets
           - secretRef:
               name: oidc-authservice-parameters-secret
+              namespace: predator-secrets
         volumeMounts:
           - name: data
             mountPath: /var/lib/authservice

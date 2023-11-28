@@ -1,16 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: istio-system
 
 resources:
 - rbac.yaml
 - service.yaml
-- oidc-authservice-client-parameters-secret-sealed.json
-- oidc-authservice-parameters-secret-sealed.json
 - statefulset.yaml
 - envoy-filter.yaml
 - pvc.yaml
-
-namespace: istio-system
 
 # configMapGenerator:
 # - name: oidc-authservice-parameters
