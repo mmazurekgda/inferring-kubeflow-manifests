@@ -40,7 +40,8 @@ resources:
 - ../../common/istio-1-16/istio-namespace/base
 - ../../common/istio-1-16/istio-install/base
 # OIDC Authservice
-- ../../common/oidc-authservice/base
+# Michał: to be replaced by custom overlay
+# - ../../common/oidc-authservice/base
 # Dex
 - ../../common/dex/overlays/istio
 # KNative
@@ -78,8 +79,8 @@ resources:
 # Training Operator
 - ../../apps/training-operator/upstream/overlays/kubeflow
 # User namespace
-- ../../common/user-namespace/base
-
+# Michal: to be replaced by custom profiles
+# - ../../common/user-namespace/base
 # KServe
 - ../../contrib/kserve/kserve
 - ../../contrib/kserve/models-web-app/overlays/kubeflow
