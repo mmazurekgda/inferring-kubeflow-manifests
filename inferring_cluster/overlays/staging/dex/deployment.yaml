@@ -20,6 +20,4 @@ spec:
           - key: config.yaml
             path: config.yaml
           secretName: dex
-          namespace: predator-secrets
         name: config
-
