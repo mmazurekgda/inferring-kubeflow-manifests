@@ -1,7 +1,7 @@
 resources:
   - ../../base
   - oidc_authservice
+  - dex/istio
 patchesStrategicMerge:
   - istio/service.yaml
   - centraldashboard/config-map.yaml
-  - dex/deployment.yaml
