@@ -25,6 +25,8 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/dex/cfg
+        - name: custom-theme
+          mountPath: /srv/dex/web/themes/custom_theme
         envFrom:
           - secretRef:
               name: dex-oidc-client
@@ -41,3 +43,14 @@ spec:
             path: config.yaml
           secretName: dex
         name: config
+      - secret:
+          defaultMode: 420
+          items:
+          - key: styles.css
+            path: styles.css
+          - key: logo.png
+            path: logo.png
+          - key: favicon.png
+            path: favicon.png
+          secretName: dex-custom-theme-secret
+        name: custom-theme
