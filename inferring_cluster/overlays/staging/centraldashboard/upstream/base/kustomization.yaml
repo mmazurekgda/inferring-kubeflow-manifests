@@ -19,12 +19,12 @@ images:
 - name: docker.io/kubeflownotebookswg/centraldashboard
   newName: docker.io/kubeflownotebookswg/centraldashboard
   newTag: v1.7.0
-# configMapGenerator:
-# - envs:
-#   - params.env
-#   name: centraldashboard-parameters
-# generatorOptions:
-#   disableNameSuffixHash: true
+configMapGenerator:
+- envs:
+  - params.env
+  name: centraldashboard-parameters
+generatorOptions:
+  disableNameSuffixHash: true
 vars:
 - fieldref:
     fieldPath: metadata.namespace
@@ -40,3 +40,10 @@ vars:
     apiVersion: v1
     kind: ConfigMap
     name: centraldashboard-config
+- fieldref:
+    fieldPath: data.CD_CLUSTER_DOMAIN
+  name: CD_CLUSTER_DOMAIN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: centraldashboard-parameters  
