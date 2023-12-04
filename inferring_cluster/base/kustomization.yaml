@@ -55,14 +55,13 @@ resources:
 - ../../common/kubeflow-roles/base
 # Kubeflow Istio Resources
 - ../../common/istio-1-16/kubeflow-istio-resources/base
-
-
 # Kubeflow Pipelines
 - ../../apps/pipeline/upstream/env/cert-manager/platform-agnostic-multi-user
 # Katib
 - ../../apps/katib/upstream/installs/katib-with-kubeflow
 # Central Dashboard
-- ../../apps/centraldashboard/upstream/overlays/kserve
+# Michał: to be replaced by custom overlay
+# - ../../apps/centraldashboard/upstream/overlays/kserve
 # Admission Webhook
 - ../../apps/admission-webhook/upstream/overlays/cert-manager
 # Jupyter Web App
