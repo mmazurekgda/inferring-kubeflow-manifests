@@ -1,7 +1,0 @@
-resources:
-  - ../../base
-  - oidc_authservice
-  - dex/istio
-  - centraldashboard/upstream/overlays/kserve
-patchesStrategicMerge:
-  - istio/service.yaml

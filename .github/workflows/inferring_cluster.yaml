@@ -16,13 +16,59 @@ jobs:
     - name: Install kustomize
       run: ./tests/gh-actions/install_kustomize.sh
 
-    - name: Run kustomize
+    - name: Run kustomize on kubeflow_core
       run: |
-        kustomize build inferring_cluster/overlays/staging | tee install.yaml
+        kustomize build deployment/kubeflow_core | tee install_kubeflow_core.yaml
+        if [ ! -s install_kubeflow_core.yaml ]; then
+          echo "install_kubeflow_core.yaml is empty"
+          exit 1
+        fi
     
-    - name: Upload install.yaml
+    - name: Upload install.yaml on kubeflow_core
       uses: actions/upload-artifact@v3
       with:
-        name: install.yaml
-        path: install.yaml
+        name: install_kubeflow_core.yaml
+        path: install_kubeflow_core.yaml
+        retention-days: 5
+
+    - name: Run kustomize on kubeflow_core_namespaces
+      run: |
+        kustomize build deployment/kubeflow_core_namespaces | tee install_kubeflow_core_namespaces.yaml
+        if [ ! -s install_kubeflow_core_namespaces.yaml ]; then
+          echo "install_kubeflow_core_namespaces.yaml is empty"
+          exit 1
+        fi
+    - name: Upload install.yaml on kubeflow_core_namespaces
+      uses: actions/upload-artifact@v3
+      with:
+        name: install_kubeflow_core_namespaces.yaml
+        path: install_kubeflow_core_namespaces.yaml
+        retention-days: 5
+    
+    - name: Run kustomize on kubeflow_components
+      run: |
+        kustomize build deployment/kubeflow_components | tee install_kubeflow_components.yaml
+        if [ ! -s install_kubeflow_components.yaml ]; then
+          echo "install_kubeflow_components.yaml is empty"
+          exit 1
+        fi
+    - name: Upload install.yaml on kubeflow_components
+      uses: actions/upload-artifact@v3
+      with:
+        name: install_kubeflow_components.yaml
+        path: install_kubeflow_components.yaml
+        retention-days: 5
+
+    - name: Run kustomize on kubeflow_components_namespaces
+      run: |
+        kustomize build deployment/kubeflow_components_namespaces | tee install_kubeflow_components_namespaces.yaml
+        if [ ! -s install_kubeflow_components_namespaces.yaml ]; then
+          echo "install_kubeflow_components_namespaces.yaml is empty"
+          exit 1
+        fi
+    - name: Upload install.yaml on kubeflow_components_namespaces
+      uses: actions/upload-artifact@v3
+      with:
+        name: install_kubeflow_components_namespaces.yaml
+        path: install_kubeflow_components_namespaces.yaml
         retention-days: 5
