@@ -1,13 +1,18 @@
-name: Unit Test
+name: Build, kustomize and deploy
 
 on:
   - push
-  - pull_request
 
 jobs:
-  build_staging:
-    name: Build staging
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ENVIRONMENT: [staging, development]
+        ROOT_DIR: [kubeflow_core, kubeflow_core_namespaces, kubeflow_components, kubeflow_components_namespaces]
 
     steps:
     - name: Check out repo
@@ -16,59 +21,17 @@ jobs:
     - name: Install kustomize
       run: ./tests/gh-actions/install_kustomize.sh
 
-    - name: Run kustomize on kubeflow_core
+    - name: Run kustomize on ${{ matrix.ROOT_DIR }} on ${{ matrix.ENVIRONMENT }}
       run: |
-        kustomize build deployment/kubeflow_core | tee install_kubeflow_core.yaml
-        if [ ! -s install_kubeflow_core.yaml ]; then
-          echo "install_kubeflow_core.yaml is empty"
+        kustomize build deployment/${{ matrix.ROOT_DIR }}/${{ matrix.ENVIRONMENT }} | tee install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml
+        if [ ! -s install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml ]; then
+          echo "install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml is empty"
           exit 1
         fi
     
-    - name: Upload install.yaml on kubeflow_core
+    - name: Upload install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml on ${{ matrix.ROOT_DIR }} on ${{ matrix.ENVIRONMENT }}
       uses: actions/upload-artifact@v3
       with:
-        name: install_kubeflow_core.yaml
-        path: install_kubeflow_core.yaml
-        retention-days: 5
-
-    - name: Run kustomize on kubeflow_core_namespaces
-      run: |
-        kustomize build deployment/kubeflow_core_namespaces | tee install_kubeflow_core_namespaces.yaml
-        if [ ! -s install_kubeflow_core_namespaces.yaml ]; then
-          echo "install_kubeflow_core_namespaces.yaml is empty"
-          exit 1
-        fi
-    - name: Upload install.yaml on kubeflow_core_namespaces
-      uses: actions/upload-artifact@v3
-      with:
-        name: install_kubeflow_core_namespaces.yaml
-        path: install_kubeflow_core_namespaces.yaml
-        retention-days: 5
-    
-    - name: Run kustomize on kubeflow_components
-      run: |
-        kustomize build deployment/kubeflow_components | tee install_kubeflow_components.yaml
-        if [ ! -s install_kubeflow_components.yaml ]; then
-          echo "install_kubeflow_components.yaml is empty"
-          exit 1
-        fi
-    - name: Upload install.yaml on kubeflow_components
-      uses: actions/upload-artifact@v3
-      with:
-        name: install_kubeflow_components.yaml
-        path: install_kubeflow_components.yaml
-        retention-days: 5
-
-    - name: Run kustomize on kubeflow_components_namespaces
-      run: |
-        kustomize build deployment/kubeflow_components_namespaces | tee install_kubeflow_components_namespaces.yaml
-        if [ ! -s install_kubeflow_components_namespaces.yaml ]; then
-          echo "install_kubeflow_components_namespaces.yaml is empty"
-          exit 1
-        fi
-    - name: Upload install.yaml on kubeflow_components_namespaces
-      uses: actions/upload-artifact@v3
-      with:
-        name: install_kubeflow_components_namespaces.yaml
-        path: install_kubeflow_components_namespaces.yaml
+        name: install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml
+        path: install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml
         retention-days: 5
