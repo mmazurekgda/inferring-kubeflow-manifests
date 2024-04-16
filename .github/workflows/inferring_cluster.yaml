@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        ENVIRONMENT: [staging, development]
+        ENVIRONMENT: [hetzner, development]
         ROOT_DIR: [kubeflow_core, kubeflow_core_namespaces, kubeflow_components, kubeflow_components_namespaces]
 
     steps:
