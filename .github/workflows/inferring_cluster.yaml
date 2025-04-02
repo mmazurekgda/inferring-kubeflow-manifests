@@ -30,7 +30,7 @@ jobs:
         fi
     
     - name: Upload install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml on ${{ matrix.ROOT_DIR }} on ${{ matrix.ENVIRONMENT }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml
         path: install_${{ matrix.ROOT_DIR }}_${{ matrix.ENVIRONMENT }}.yaml
